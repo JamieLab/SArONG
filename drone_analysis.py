@@ -65,6 +65,11 @@ droneLogTemplatePath = Template(path.join(logDirectorySeparated, path.basename(l
 imageDataPath = "data/drone_flight/drone_image_data.csv";
 
 
+#correct for lense distortion
+if doLensCorrection == True:
+    cameraMatrix, distortionCoefs = camera_calibration_settings.get_Mapir_Survey2_calibration_parameters(); #Get camera calibration parameters
+    lens_correct_cv.correct_lens_distortion(imageDirectoryOriginal, imageDirectoryUndistorted, cameraMatrix, distortionCoefs);
+
 #Separate the argupilot log into separate logs for each instrument/FORMAT
 if path.exists(logDirectorySeparated) == False:
     separate_ardupilot_logs(logPathOriginal, logDirectorySeparated);
@@ -72,10 +77,6 @@ else:
     print("Separated drone logs not written to avoid overwriting files in:", logDirectorySeparated);
 
 
-#correct for lense distortion
-if doLensCorrection == True:
-    cameraMatrix, distortionCoefs = camera_calibration_settings.get_Mapir_Survey2_calibration_parameters(); #Get camera calibration parameters
-    lens_correct_cv.correct_lens_distortion(imageDirectoryOriginal, imageDirectoryUndistorted, cameraMatrix, distortionCoefs);
 
 
 #Extract orientation and position data for each image and store as a csv file.
