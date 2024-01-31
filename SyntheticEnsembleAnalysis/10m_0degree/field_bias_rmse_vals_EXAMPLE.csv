@@ -1,0 +1,7 @@
+var,target,diffMean,tSE,bias,rmse
+Easting,0,0,0,0,0
+Northing,0,0,0,0,0
+Altitude,10,0,0,0,0
+Roll,0,0,0.1,0,2
+Pitch,-90,0,0,0,2
+Yaw,0,0,0,0,0
